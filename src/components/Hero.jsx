@@ -1,99 +1,158 @@
 import React from 'react';
-import { FileText } from 'lucide-react';
+import { Mail, Phone } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 import { LinkedinIcon, GithubIcon, LeetcodeIcon } from './SocialIcons';
 
 export default function Hero({ onOpenHireMe, onOpenResume }) {
   const { personal } = portfolioData;
 
-  const handleOpenResume = () => {
-    onOpenResume();
+  const handleScrollTo = (e, targetId) => {
+    e.preventDefault();
+    const elem = document.querySelector(targetId);
+    if (elem) {
+      const navHeight = 80;
+      const elementPosition = elem.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({
+        top: elementPosition - navHeight,
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (
     <section id="home" className="hero-section">
       <div className="container hero-container">
-        {/* Left Column: Bio & Call to Actions */}
+        {/* Left Column: Formatted matching reference layout */}
         <div className="hero-content">
-          <p className="hero-greeting">Hi I am</p>
-          <h1 className="hero-name">{personal.shortName}</h1>
-          <h2 className="hero-title">{personal.role}</h2>
-
-          {/* Action Buttons: Hire Me and Resume */}
-          <div className="hero-buttons">
-            <button
-              className="btn-hire-me hero-btn-hire"
-              onClick={onOpenHireMe}
-              id="hero-hire-me-btn"
-            >
-              Hire Me
-            </button>
-
-            <button
-              className="btn-view-resume hero-btn-resume"
-              onClick={handleOpenResume}
-              id="hero-view-resume-btn"
-              title="View Uploaded Resume"
-            >
-              <FileText size={18} />
-              <span>Resume</span>
-            </button>
+          {/* Status Pill: OPEN TO AI/ML & SDE ROLES */}
+          <div className="hero-status-pill">
+            <span className="status-dot"></span>
+            <span className="status-text">OPEN TO AI/ML &amp; SDE ROLES</span>
           </div>
 
-          {/* Social Icons Row */}
-          <div className="hero-socials">
-            <a
-              href={personal.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-icon-btn"
-              title="LinkedIn Profile"
-              aria-label="LinkedIn"
-            >
-              <LinkedinIcon size={20} />
-            </a>
+          {/* Eyebrow: MY NAME IS */}
+          <p className="hero-eyebrow">MY NAME IS</p>
 
+          {/* Bold Headline Name */}
+          <h1 className="hero-name">POOJITHA RAMYA</h1>
+
+          {/* Role Statement */}
+          <div className="hero-statement">
+            <h2 className="hero-statement-lead">
+              I am an <span className="hero-role-highlight">AI/ML Engineer</span>
+            </h2>
+            <p className="hero-statement-desc">
+              &amp; Full Stack Developer crafting intelligent models and production platforms.
+            </p>
+          </div>
+
+          {/* Action Links with Underlines: ABOUT ME, PROJECTS, HIRE ME / VIEW RESUME */}
+          <div className="hero-action-links">
+            <div className="hero-action-row">
+              <a
+                href="#about"
+                className="hero-underline-link"
+                onClick={(e) => handleScrollTo(e, '#about')}
+              >
+                ABOUT ME
+              </a>
+
+              <a
+                href="#projects"
+                className="hero-underline-link"
+                onClick={(e) => handleScrollTo(e, '#projects')}
+              >
+                PROJECTS
+              </a>
+
+              <button
+                type="button"
+                className="hero-underline-link"
+                onClick={onOpenHireMe}
+                id="hero-hire-me-link"
+              >
+                HIRE ME
+              </button>
+            </div>
+
+            <div className="hero-action-row">
+              <button
+                type="button"
+                className="hero-underline-link"
+                onClick={onOpenResume}
+                id="hero-resume-link"
+              >
+                VIEW RESUME
+              </button>
+            </div>
+          </div>
+
+          {/* Social Icons Row: GitHub, LinkedIn, LeetCode, Email, Phone */}
+          <div className="hero-social-row">
             <a
               href={personal.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="social-icon-btn"
+              className="hero-social-icon-btn"
               title="GitHub Profile"
               aria-label="GitHub"
             >
-              <GithubIcon size={20} />
+              <GithubIcon size={21} />
+            </a>
+
+            <a
+              href={personal.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hero-social-icon-btn"
+              title="LinkedIn Profile"
+              aria-label="LinkedIn"
+            >
+              <LinkedinIcon size={21} />
             </a>
 
             <a
               href={personal.leetcode}
               target="_blank"
               rel="noopener noreferrer"
-              className="social-icon-btn"
+              className="hero-social-icon-btn"
               title="LeetCode Profile"
               aria-label="LeetCode"
             >
-              <LeetcodeIcon size={20} />
+              <LeetcodeIcon size={21} />
             </a>
-          </div>
 
-          {/* Hero Floating Stats Card */}
-          <div className="hero-stats-card">
-            {personal.stats.map((stat, idx) => (
-              <div key={idx} className="stat-column">
-                <span className="stat-value">{stat.value}</span>
-                <span className="stat-label">{stat.label}</span>
-              </div>
-            ))}
+            <a
+              href={`mailto:${personal.email}`}
+              className="hero-social-icon-btn"
+              title={`Email: ${personal.email}`}
+              aria-label="Email"
+            >
+              <Mail size={21} />
+            </a>
+
+            <a
+              href={`tel:${personal.rawPhone}`}
+              className="hero-social-icon-btn"
+              title={`Phone: ${personal.phone}`}
+              aria-label="Phone"
+            >
+              <Phone size={21} />
+            </a>
           </div>
         </div>
 
-        {/* Right Column: Circular Portrait with exact user photo */}
+        {/* Right Column: Natural Cutout Portrait Blended into Background */}
         <div className="hero-image-wrapper">
-          <div className="hero-portrait-circle">
+          <div className="hero-portrait-stage">
+            {/* Ambient Backlight Glow */}
+            <div className="hero-portrait-glow" aria-hidden="true"></div>
+
+            {/* Seamless blended portrait photo (NO circle) */}
             <img
               src={personal.photo}
               alt={personal.fullName}
-              className="hero-portrait-img"
+              className="hero-portrait-photo"
               loading="eager"
             />
           </div>

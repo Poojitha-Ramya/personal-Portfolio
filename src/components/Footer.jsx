@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Phone, ArrowUp } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 import { LinkedinIcon, GithubIcon, LeetcodeIcon } from './SocialIcons';
 
@@ -14,96 +14,78 @@ export default function Footer() {
   };
 
   return (
-    <footer className="footer-section">
-      <div className="container">
-        <div className="footer-top-row">
-          {/* Logo & Headline */}
-          <div className="footer-brand-col">
-            <a href="#home" className="brand-logo footer-logo">
-              <span className="logo-letter-p">P</span>
-              <span className="logo-letter-r">R</span>
-            </a>
-            <h3 className="footer-name">{personal.fullName}</h3>
-            <p className="footer-tagline">{personal.subtitle}</p>
+    <footer className="footer-minimal-section">
+      <div className="container footer-minimal-container">
+        {/* Brand & Identity Block: Box Logo + Name & Subtitle */}
+        <div className="footer-identity-group">
+          <div className="footer-box-logo" title="PR">
+            <span className="logo-letter-p">P</span>
+            <span className="logo-letter-r">R</span>
           </div>
 
-          {/* Nav links */}
-          <div className="footer-nav-col">
-            <h4 className="footer-heading">Navigation</h4>
-            <ul className="footer-links-list">
-              <li><a href="#home">Home</a></li>
-              <li><a href="#services">Services</a></li>
-              <li><a href="#about">About Me</a></li>
-              <li><a href="#projects">Portfolio</a></li>
-              <li><a href="#journey">Career Journey</a></li>
-              <li><a href="#contact">Contact Me</a></li>
-            </ul>
-          </div>
-
-          {/* Connect & Social */}
-          <div className="footer-social-col">
-            <h4 className="footer-heading">Connect</h4>
-            <div className="footer-social-icons">
-              <a
-                href={personal.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-social-btn"
-                title="LinkedIn"
-              >
-                <LinkedinIcon size={18} />
-              </a>
-              <a
-                href={personal.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-social-btn"
-                title="GitHub"
-              >
-                <GithubIcon size={18} />
-              </a>
-              <a
-                href={personal.leetcode}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-social-btn"
-                title="LeetCode"
-              >
-                <LeetcodeIcon size={18} />
-              </a>
-              <a
-                href={`mailto:${personal.email}`}
-                className="footer-social-btn"
-                title="Email"
-              >
-                <Mail size={18} />
-              </a>
-              <a
-                href={`tel:${personal.rawPhone}`}
-                className="footer-social-btn"
-                title="Phone"
-              >
-                <Phone size={18} />
-              </a>
-            </div>
-            <p className="footer-location-text">{personal.location}</p>
+          <div className="footer-text-group">
+            <h3 className="footer-title-name">{personal.fullName}</h3>
+            <p className="footer-meta-line">
+              AI/ML Engineer <span className="meta-dot">•</span> Full Stack Developer <span className="meta-dot">•</span> Andhra Pradesh, India
+            </p>
           </div>
         </div>
 
-        {/* Footer Bottom Divider */}
-        <div className="footer-bottom-row">
-          <p className="footer-copyright">
-            © {new Date().getFullYear()} Chipurupalli Poojitha Ramya. All rights reserved.
-          </p>
+        {/* Minimalist Social Icons Row */}
+        <div className="footer-social-row">
+          <a
+            href={personal.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-social-link"
+            title="GitHub Profile"
+            aria-label="GitHub"
+          >
+            <GithubIcon size={22} />
+          </a>
 
+          <a
+            href={personal.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-social-link"
+            title="LinkedIn Profile"
+            aria-label="LinkedIn"
+          >
+            <LinkedinIcon size={22} />
+          </a>
+
+          <a
+            href={personal.leetcode}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-social-link"
+            title="LeetCode Profile"
+            aria-label="LeetCode"
+          >
+            <LeetcodeIcon size={22} />
+          </a>
+
+          <a
+            href={`mailto:${personal.email}`}
+            className="footer-social-link"
+            title={`Email: ${personal.email}`}
+            aria-label="Email"
+          >
+            <Mail size={22} />
+          </a>
+        </div>
+
+        {/* Back To Top Action */}
+        <div className="footer-back-to-top-wrap">
           <button
             onClick={scrollToTop}
-            className="back-to-top-btn"
+            className="footer-back-to-top-btn"
+            id="footer-back-to-top-btn"
             title="Back to Top"
-            id="back-to-top-btn"
           >
-            <span>Back to top</span>
-            <ArrowUp size={16} />
+            <span>BACK TO TOP</span>
+            <span className="arrow-up-icon" aria-hidden="true">↑</span>
           </button>
         </div>
       </div>

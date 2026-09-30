@@ -23,10 +23,10 @@ export default function Services() {
       <div className="container">
         {/* Section Header */}
         <div className="section-eyebrow-container">
-          <span className="orange-bar"></span>
-          <span className="section-eyebrow">WHAT I OFFER</span>
+          {/* <span className="orange-bar"></span>
+          <span className="section-eyebrow"></span> */}
         </div>
-        <h2 className="section-title">My Services</h2>
+        <h2 className="section-title">I'M SPECIALIZED IN</h2>
 
         {/* Services Stack: One Below Another */}
         <div className="services-vertical-stack">

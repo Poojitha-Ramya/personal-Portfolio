@@ -13,8 +13,8 @@ export const portfolioData = {
     github: "https://github.com/Poojitha-Ramya",
     githubDisplay: "github.com/Poojitha-Ramya",
     leetcode: "https://leetcode.com/u/ChipurupalliPujithaRamya/",
-    leetcodeDisplay: "leetcode.com/u/ChipurupalliPujithaRamya/",
-    photo: "/images/poojitha_photo.jpg",
+    photo: "/images/poojitha_blend.png",
+    photoOriginal: "/images/poojitha_photo.jpg",
     resumePdf: "/Poojitha_Ramya_Resume.pdf",
     stats: [
       { value: "9.50", label: "CGPA" },

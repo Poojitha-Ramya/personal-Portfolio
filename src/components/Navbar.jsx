@@ -13,6 +13,22 @@ export default function Navbar({ onOpenHireMe, activeSection }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [mobileMenuOpen]);
+
   const navLinks = [
     { name: 'Home', href: '#home' },
     { name: 'Services', href: '#services' },
@@ -36,86 +52,97 @@ export default function Navbar({ onOpenHireMe, activeSection }) {
   };
 
   return (
-    <header className={`navbar-header ${isScrolled ? 'navbar-scrolled' : ''}`}>
-      <div className="container navbar-container">
-        {/* Brand Logo */}
-        <a href="#home" className="brand-logo" onClick={(e) => handleLinkClick(e, '#home')}>
-          <span className="logo-letter-p">P</span>
-          <span className="logo-letter-r">R</span>
-        </a>
+    <>
+      <header className={`navbar-header ${isScrolled ? 'navbar-scrolled' : ''}`}>
+        <div className="container navbar-container">
+          {/* Brand Logo */}
+          <a href="#home" className="brand-logo" onClick={(e) => handleLinkClick(e, '#home')}>
+            <span className="logo-letter-p">P</span>
+            <span className="logo-letter-r">R</span>
+          </a>
 
-        {/* Desktop Navigation */}
-        <nav className="desktop-nav">
-          <ul className="nav-links">
-            {navLinks.map((link) => {
-              const sectionId = link.href.replace('#', '');
-              const isActive = activeSection === sectionId;
-              return (
+          {/* Desktop Navigation */}
+          <nav className="desktop-nav">
+            <ul className="nav-links">
+              {navLinks.map((link) => {
+                const sectionId = link.href.replace('#', '');
+                const isActive = activeSection === sectionId;
+                return (
+                  <li key={link.name}>
+                    <a
+                      href={link.href}
+                      className={`nav-link ${isActive ? 'active' : ''}`}
+                      onClick={(e) => handleLinkClick(e, link.href)}
+                    >
+                      {link.name}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+
+          {/* Header Right CTA */}
+          <div className="navbar-actions">
+            <button
+              className="btn-hire-me navbar-hire-btn"
+              onClick={onOpenHireMe}
+              id="hire-me-nav-btn"
+            >
+              Hire Me
+            </button>
+
+            {/* Mobile Menu Button */}
+            <button
+              className="mobile-toggle-btn"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle navigation menu"
+              id="mobile-menu-toggle"
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Drawer */}
+        {mobileMenuOpen && (
+          <div className="mobile-drawer">
+            <ul className="mobile-nav-links">
+              {navLinks.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className={`nav-link ${isActive ? 'active' : ''}`}
+                    className="mobile-nav-link"
                     onClick={(e) => handleLinkClick(e, link.href)}
                   >
                     {link.name}
                   </a>
                 </li>
-              );
-            })}
-          </ul>
-        </nav>
-
-        {/* Header Right CTA */}
-        <div className="navbar-actions">
-          <button
-            className="btn-hire-me"
-            onClick={onOpenHireMe}
-            id="hire-me-nav-btn"
-          >
-            Hire Me
-          </button>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="mobile-toggle-btn"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle navigation menu"
-            id="mobile-menu-toggle"
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div className="mobile-drawer">
-          <ul className="mobile-nav-links">
-            {navLinks.map((link) => (
-              <li key={link.name}>
-                <a
-                  href={link.href}
-                  className="mobile-nav-link"
-                  onClick={(e) => handleLinkClick(e, link.href)}
+              ))}
+              <li className="mobile-cta-item">
+                <button
+                  className="btn-hire-me mobile-hire-btn"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenHireMe();
+                  }}
                 >
-                  {link.name}
-                </a>
+                  Hire Me
+                </button>
               </li>
-            ))}
-            <li className="mobile-cta-item">
-              <button
-                className="btn-hire-me mobile-hire-btn"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenHireMe();
-                }}
-              >
-                Hire Me
-              </button>
-            </li>
-          </ul>
-        </div>
+            </ul>
+          </div>
+        )}
+      </header>
+
+      {/* Mobile Drawer Backdrop */}
+      {mobileMenuOpen && (
+        <div
+          className="mobile-menu-backdrop"
+          onClick={() => setMobileMenuOpen(false)}
+          aria-hidden="true"
+        />
       )}
-    </header>
+    </>
   );
 }
