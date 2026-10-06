@@ -18,7 +18,7 @@ export const portfolioData = {
     resumePdf: "/Poojitha_Ramya_Resume.pdf",
     stats: [
       { value: "9.50", label: "CGPA" },
-      { value: "2+", label: "Featured Projects" },
+      { value: "4+", label: "Featured Projects" },
       { value: "150+", label: "LeetCode Solved" }
     ],
     summary:
@@ -55,6 +55,30 @@ export const portfolioData = {
   ],
 
   projects: [
+    {
+      id: "mini-researcher",
+      title: "Mini Researcher",
+      subtitle: "Autonomous Multi-Agent AI Research Assistant",
+      year: "2025",
+      category: "Agentic AI & RAG",
+      featured: true,
+      image: "/images/mini_researcher.jpg",
+      tags: ["Agentic AI", "Multi-Agent System", "RAG", "Tavily", "Google Gemini", "ChromaDB", "React.js"],
+      liveUrl: "https://main-project-khaki-rho.vercel.app/",
+      description:
+        "Built an agentic AI research assistant using a multi-agent architecture and Retrieval-Augmented Generation (RAG). Implemented web and document-based retrieval using Tavily, Gemini embeddings, and ChromaDB for semantic vector search. The system uses Manager, Research, Document, Curator, Writer, and Reviewer agents to plan research, retrieve and evaluate evidence, generate grounded reports, and iteratively review results.",
+      longDescription: [
+        "Built an agentic AI research assistant using a multi-agent architecture and Retrieval-Augmented Generation (RAG).",
+        "Implemented web and document-based retrieval using Tavily, Gemini embeddings, and ChromaDB for semantic vector search.",
+        "Orchestrated 6 specialized agents—Manager, Research, Document, Curator, Writer, and Reviewer—to plan research, retrieve and evaluate evidence, generate grounded reports, and iteratively review results.",
+        "Designed real-time swarm execution pipeline visualization and deployed the production app on Vercel."
+      ],
+      metrics: [
+        { label: "Swarm Agents", value: "6 Specialized" },
+        { label: "Vector Search", value: "ChromaDB + Gemini" },
+        { label: "Live Retrieval", value: "Tavily Web Search" }
+      ]
+    },
     {
       id: "jobflow-engine",
       title: "JobFlow Engine",
